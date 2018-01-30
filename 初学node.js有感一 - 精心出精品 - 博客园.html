@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/zyrblog/p/7545868.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>初学node.js有感一 - 精心出精品 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./初学node.js有感一 - 精心出精品 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./初学node.js有感一 - 精心出精品 - 博客园_files/bundle-CodingLife.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./初学node.js有感一 - 精心出精品 - 博客园_files/bundle-CodingLife-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/zyrblog/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/zyrblog/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/zyrblog/wlwmanifest.xml">
+<script async="" src="./初学node.js有感一 - 精心出精品 - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./初学node.js有感一 - 精心出精品 - 博客园_files/encoder.js.下载"></script><script src="./初学node.js有感一 - 精心出精品 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'zyrblog', cb_enable_mathjax=true;var isLogined=false;</script>
+<script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'blogpost-body', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+            'HTML-CSS': { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="./初学node.js有感一 - 精心出精品 - 博客园_files/MathJax.js.下载"></script>
+<script src="./初学node.js有感一 - 精心出精品 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/zyrblog/"><img id="blogLogo" src="./初学node.js有感一 - 精心出精品 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/zyrblog/">精心出精品</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/zyrblog/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E7%B2%BE%E5%BF%83%E5%87%BA%E7%B2%BE%E5%93%81">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/zyrblog/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/zyrblog/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 21&nbsp; </span>
+<span id="stats_article_count">文章 - 2&nbsp; </span>
+<span id="stats-comment_count">评论 - 15</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/zyrblog/p/7545868.html">初学node.js有感一</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p style="text-align: center"><span style="font-size: 14pt"><strong>Node.js感悟</strong></span></p>
+<p><span style="font-size: 16px; background-color: #00ff00"><strong>一、前言</strong></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 很久以前就对node.js十分的好奇和感兴趣，因为种种原因没能去深入的认识了解和学习掌握这门技术，最近正好要做一些项目，其中就用到了node.js中的一些东西，所以借着使用的时间来对node.js进行一些剖析，每一种语言都有自己的理念和设计初衷，但是万变不离其宗，最终还是要归结到编译和执行，对于一门新的语言，我们不要急着去记忆语法，最好的方式就是通过问题的形式去不断的积累经验，自然而然的那些语法，特殊思想就渐渐地熟能生巧了，<span style="background-color: #ffff99"><strong>万事开头难</strong></span>，任何东西到了一定的程度之后都是殊途同归的，本人也学习了很多语言，解释性语言和执行性语言遇到的也比较多，对于node.js在这里就将我自己的学习过程和经验记录下来，一方面是为了以后的查阅和学习，另一方面是为广大的IT界网友的知识库中增砖添瓦，好了，闲言休谈，直入主题！&nbsp;</p>
+<p><span style="font-size: 16px"><strong><span style="background-color: #00ff00">二、node.js的性质、优缺点和适用范围</span></strong></span></p>
+<p>&nbsp; &nbsp;&nbsp; Node.js是一个专注于实现<strong><span style="background-color: #ffff00">高性能Web服务器</span></strong>优化的专家，几经探索，几经挫折后，遇到<strong><span style="background-color: #ffff00">V8</span></strong>而诞生的项目。<span style="color: #ff0000; background-color: #ffffff"><strong>Node.js是一个让JavaScript运行在服务器端的开发平台</strong></span>，它让JavaScript的触角伸到了服务器端，可以与PHP、JSP、Python、Ruby平起平坐。但Node似乎有点不同：Node.js不是一种独立的语言，与PHP、JSP、Python、Perl、Ruby的“既是语言，也是平台”不同，Node.js的使用JavaScript进行编程，运行在JavaScript引擎上（V8）。与PHP、JSP等相比（PHP、JSP、.net都需要运行在服务器程序上，Apache、Naginx、Tomcat、IIS。），Node.js跳过了Apache、Naginx、IIS等HTTP服务器，它自己不用建设在任何服务器软件之上。Node.js的许多设计理念与经典架构（LAMP = Linux + Apache + MySQL + PHP）有着很大的不同，可以提供强大的伸缩能力。Node.js没有web容器。<strong>Node.js自身哲学，是花最小的硬件成本，追求更高的并发，更高的处理性能。</strong></p>
+<p>&nbsp;&nbsp;&nbsp; <span style="background-color: #ffff00"><strong>单线程</strong></span>：在Java、PHP或者.net等服务器端语言中，会为每一个客户端连接创建一个新的线程，而每个线程需要耗费大约2MB内存，理论上一个8GB内存的服务器可以同时连接的最大用户数为4000个左右。要让Web应用程序支持更多的用户，就需要增加服务器的数量，而Web应用程序的硬件成本当然就上升了。Node.js不为每个客户连接创建一个新的线程，而仅仅使用<strong>一个线程</strong>。当有用户连接了，就触发一个内部事件，通过非阻塞I/O、事件驱动机制，让Node.js程序宏观上也是并行的。使用Node.js，一个8GB内存的服务器，可以同时处理超过4万用户的连接。另外，单线程的带来的好处，还有操作系统完全不再有线程创建、销毁的时间开销。</p>
+<p>&nbsp;&nbsp;&nbsp; <span style="background-color: #ffff00"><strong>非阻塞I/O</strong></span>：因为CPU的效率是远远高于I/O设备的执行效率的，如果让CPU去等待I/O的执行，将会极大地浪费时间，降低性能，比如在访问数据库或者读文件的时候，在传统的单线程处理机制中，在执行了访问数据库或文件代码之后，整个线程都将暂停下来（<strong>阻塞I/O</strong>），等待数据库或者文件系统返回结果才能执行后面的代码。I/O阻塞了代码的执行极大地降低了程序的执行效率。由于Node.js中采用了<strong>非阻塞型I/O</strong>机制，因此在执行了访问数据库或文件的代码之后，将立即转而执行其他代码，把返回结果的处理代码放在<strong>回调函数</strong>中，从而提高了程序的执行效率。当某个I/O执行完毕时，将以<strong>事件</strong>的形式通知执行I/O操作的线程，线程执行这个事件的回调函数。为了处理异步I/O，线程必须有事件循环，不断的检查有没有未处理的事件，依次予以处理。阻塞模式下，一个线程只能处理一项任务，要想提高吞吐量必须通过多线程。而非阻塞模式下，一个线程永远在执行计算操作，这个线程的CPU核心利用率永远是100%。所以，这是一种特别有哲理的解决方案：与其人多，但是好多人闲着；还不如一个人玩命，往死里干活儿。</p>
+<p>&nbsp;&nbsp;&nbsp; <strong><span style="background-color: #ffff00">事件驱动</span></strong>：在Node中，客户端请求建立连接，提交数据等行为，会触发相应的事件。在Node中，在一个时刻，只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件，然后返回继续执行原事件的回调函数，这种处理机制，称为“事件环”机制。<strong>Node.js底层是C++（V8也是C++写的），</strong>底层代码中，近半数都用于<span style="background-color: #ffff00">事件队列、回调函数队列</span>的构建。</p>
+<p>&nbsp;&nbsp;&nbsp; <strong><span style="background-color: #ffff00">优缺点</span></strong>：因为单线程，在处理大规模并发的任务中还是会显得力不从心的，比如在CPU密集型事务中就会遇到瓶颈，另外就是node.js是没有web容器的，代码直接没有根目录的说法，在一定程度上为程序员增加了代码量，但也提高了灵活性，为高级路由带来了极大的方便，在node.js中回调函数会有很深的层次，为代码的阅读多多少少造成了一定的障碍。善于处理异步事件（callback），处理同步事务中需要额外的负担。</p>
+<p>&nbsp; &nbsp; <span style="background-color: #ffff00"><strong>适用范围</strong></span>：当应用程序需要<span style="background-color: #ffff00"><strong>处理大量并发的I/O</strong></span>，而在向客户端发出响应之前，应用程序内部并不需要进行非常复杂的处理的时候，Node.js非常适合。Node.js也非常适合与<span style="background-color: #ffff00"><strong>web socket</strong></span>配合，开发长连接的实时交互应用程序。比如：用户表单收集、考试系统、聊天室、图文直播、提供JSON的API（为前台Angular使用）。</p>
+<p><span style="font-size: 16px; background-color: #00ff00"><strong>三、部署环境</strong></span></p>
+<p>&nbsp; &nbsp;&nbsp; node.js类似于Java，和Java的虚拟机原理有点相似可以在Linux和Windows机器上运行，但是编程的方式和细微之处还是有差异的，这里主要从Windows的环境中来理解，因为本质上还是语言的设计思想是我们的着重点和兴趣点！</p>
+<p><strong>1,下载node.js</strong></p>
+<p>&nbsp;&nbsp;&nbsp; 这是非常简单的一件事情，可以在https://nodejs.org/en/download/上方便的下载适合自己电脑的版本，这里我们使用Windows平台。</p>
+<p><span style="background-color: #ffffff"><strong>2,安装node.js</strong></span></p>
+<p>&nbsp; &nbsp; 只需双击即可完成安装，在这里建议不要将路径放到C盘，这是一种安装软件的共识。并且在安装的过程中，安装向导已经帮我们完成了环境变量的注册，我们可以通过环境变量来查看，这点很浅显，不必再说。</p>
+<p><strong>3,下载sublime</strong></p>
+<p><span style="background-color: #ffffff">&nbsp;&nbsp;&nbsp; 因为node.js非常的轻量级，差不多10MB左右，原生的环境是没有GUI的，我们可以先在文本编辑器中编写代码，在这里当然是推荐sublime了，当然notebook也不错~~</span></p>
+<p><strong><span style="color: #000000; font-size: 16px; background-color: #00ff00">四、编写简单的程序——hello，world！</span></strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 273.6px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p>&nbsp; &nbsp;&nbsp; 编写了.js的程序，运行的时候就要通过node.js来运行了，首先在CMD中切换到编写程序的目录下，当然也可以不用。然后用node&nbsp;XXX.js即可启动服务。然后在浏览器中（建议用Firefox）输入相应的监听IP地址加上端口号，这里的端口号使用比较大一点的就可以，因为是回环测试，所以使用127.0.0.1来作为测试IP。</p>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918220230775-1674200638.png" alt="" width="425" height="174"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918220312650-1452897034.png" alt="" width="305" height="131"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这样一个简单的程序就运行成功了，回顾一下，我们其实是用node.js搭建了一个服务器，然后来监听端口的访问事件，最后做出相应的回应，这样一个简单的例子其实是非常有用的，毕竟我们的服务器已经可以工作了，但是这样也有许多缺陷，比如我们关闭CMD之后服务就关闭了，比如我们运行一次程序需要的过程十分繁琐，这些都会在以后得到解决！</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 注意：在node.js中<strong><span style="color: #ff0000">必须使用res.end()</span></strong>函数来返回，不然的话浏览器会认为服务器还没有结束本次的数据传输，而一直进入忙等状态，这点值得警醒，另外，require和C语言中的include很像，都是导入相应的包。</p>
+<p><strong><span style="font-size: 16px; background-color: #00ff00">五、node.js没有web容器，访问的文件路径和url可能关系不大</span></strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 600px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p>&nbsp;&nbsp;&nbsp; 上面的代码就是说明这样的一种情况，当用户输入了URL之后进行处理的时候，node.js可以对URL进行解析并且按照自己设定好的路径来根据相应的字段找到可能是有着好几个文件夹下的一个文件，这个文件的文件名可能与url中的字段完全不同，也就是说可以把字段看做一个<span style="color: #ff0000"><strong>地址（指针）</strong></span>，指向相应的文件所在的物理位置！</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080">1</span> <span style="color: #0000ff">if</span>(req.url == "/fang"<span style="color: #000000">){
+</span><span style="color: #008080">2</span>         fs.readFile("./test/xixi.html",<span style="color: #0000ff">function</span><span style="color: #000000">(err,data){
+</span><span style="color: #008080">3</span>             <span style="color: #008000">//</span><span style="color: #008000">req表示请求，request;  res表示响应，response</span>
+<span style="color: #008080">4</span>             <span style="color: #008000">//</span><span style="color: #008000">设置HTTP头部，状态码是200，文件类型是html，字符集是utf8</span>
+<span style="color: #008080">5</span>             res.writeHead(200,{"Content-type":"text/html;charset=UTF-8"<span style="color: #000000">});
+</span><span style="color: #008080">6</span> <span style="color: #000000">            res.end(data);
+</span><span style="color: #008080">7</span> <span style="color: #000000">        });
+</span><span style="color: #008080">8</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;&nbsp;&nbsp; 比如上面的代码，明明URL是<strong><span style="color: #ff0000">IP+/fang</span></strong>，可是在返回数据的时候将<strong><span style="color: #ff0000">当前目录下的test文件夹下的xixi.html文件</span></strong>作为返回对象。为网站的路由设计提供了极大的便利。</p>
+<p><span style="font-size: 16px"><strong><span style="background-color: #00ff00">六、对URL解析</span></strong></span></p>
+<p><span style="font-size: 14px; background-color: #ffffff"><strong>6.1、解析URL案例</strong></span></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 341.6px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><strong>&nbsp;运行结果：</strong></p>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918232719228-1737072236.png" alt=""></p>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918232755696-1108094263.png" alt=""></p>
+<p><span style="font-size: 14px"><strong>6.2、通过正则表达式来解析URL并设计路由</strong></span></p>
+<p><span style="font-size: 14px"><strong>&nbsp; eg:通过输入的信息的不同选择跳转到不同的界面</strong></span></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 546.4px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><strong>&nbsp; 测试结果：</strong></p>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919164400275-891025448.png" alt="" width="243" height="99"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919164523821-804699956.png" alt="" width="239" height="98"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919164544650-1366372960.png" alt="" width="212" height="97"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919164623056-555151119.png" alt="" width="142" height="38"></p>
+<p><span style="font-size: 16px; background-color: #00ff00"><strong>七、表单提交</strong></span></p>
+<p><strong>服务器代码：</strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 290.4px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><strong>浏览器代码：</strong></p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 341.6px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918233916150-34407374.png" alt=""><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170918233934087-1558256242.png" alt=""></p>
+<p><span style="background-color: #00ff00; font-size: 16px"><strong>八、事件环机制——多用户访问导致的异步现象</strong></span></p>
+<p>&nbsp; 因为node.js是单线程的，所以同一时刻有大量用户在访问的时候，而且是在做读文件的I/O操作的时候，因为非阻塞的性质，此时单线程回去处理其他事情，也就是去处理其他用户的请求，等文件读取完毕了，再通过外设来以事件的形式通知CPU响应并处理！下图的运行结果并没有反应该性质，是因为自己的手速怎么能比得上计算机的处理效率呢，如果多台电脑（浏览器）<strong>同时</strong>访问，那肯定会出现次序的混乱的。</p>
+<div class="cnblogs_code"><div>按 Ctrl+C 复制代码</div><textarea style="width: 836px; height: 495.2px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919165617806-2046791546.png" alt=""></p>
+<p><span style="background-color: #ffff00; font-size: 16px"><strong>九、通过API来创建文件，并且知道自己读取的是一个文件还是文件夹</strong></span></p>
+<p><strong>任务一：简单的判断文件是不是文件夹</strong></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080"> 1</span> <span style="color: #0000ff">var</span> http = require("http"<span style="color: #000000">);
+</span><span style="color: #008080"> 2</span> <span style="color: #0000ff">var</span> fs = require("fs"<span style="color: #000000">);
+</span><span style="color: #008080"> 3</span> 
+<span style="color: #008080"> 4</span> <span style="color: #0000ff">var</span> server = http.createServer(<span style="color: #0000ff">function</span><span style="color: #000000">(req,res){
+</span><span style="color: #008080"> 5</span>     <span style="color: #008000">//</span><span style="color: #008000">不处理小图标</span>
+<span style="color: #008080"> 6</span>     <span style="color: #0000ff">if</span>(req.url == "/favicon.ico"<span style="color: #000000">){
+</span><span style="color: #008080"> 7</span>         <span style="color: #0000ff">return</span><span style="color: #000000">;
+</span><span style="color: #008080"> 8</span> <span style="color: #000000">    }
+</span><span style="color: #008080"> 9</span>     fs.mkdir("./album"<span style="color: #000000">);
+</span><span style="color: #008080">10</span>     fs.mkdir("./album/aaa"<span style="color: #000000">);
+</span><span style="color: #008080">11</span>     <span style="color: #008000">//</span><span style="color: #008000">stat检测状态</span>
+<span style="color: #008080">12</span>     fs.stat("./album/aaa",<span style="color: #0000ff">function</span><span style="color: #000000">(err,data){
+</span><span style="color: #008080">13</span>         <span style="color: #008000">//</span><span style="color: #008000">检测这个路径，是不是一个文件夹</span>
+<span style="color: #008080">14</span> <span style="color: #000000">        console.log(data.isDirectory());
+</span><span style="color: #008080">15</span> <span style="color: #000000">    });
+</span><span style="color: #008080">16</span> <span style="color: #000000">    res.end();
+</span><span style="color: #008080">17</span> <span style="color: #000000">});
+</span><span style="color: #008080">18</span> 
+<span style="color: #008080">19</span> server.listen(3000,"127.0.0.1");</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919171014759-829463882.png" alt=""></p>
+<p><strong>任务二：读取一个文件目录下的所有文件夹并且显示出来</strong></p>
+<p><strong>&nbsp;&nbsp;&nbsp; 方法一：思考为什么会失败！！！</strong></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080"> 1</span> <span style="color: #0000ff">var</span> http = require("http"<span style="color: #000000">);
+</span><span style="color: #008080"> 2</span> <span style="color: #0000ff">var</span> fs = require("fs"<span style="color: #000000">);
+</span><span style="color: #008080"> 3</span> 
+<span style="color: #008080"> 4</span> <span style="color: #0000ff">var</span> server = http.createServer(<span style="color: #0000ff">function</span><span style="color: #000000">(req,res){
+</span><span style="color: #008080"> 5</span>     <span style="color: #008000">//</span><span style="color: #008000">不处理小图标</span>
+<span style="color: #008080"> 6</span>     <span style="color: #0000ff">if</span>(req.url == "/favicon.ico"<span style="color: #000000">){
+</span><span style="color: #008080"> 7</span>         <span style="color: #0000ff">return</span><span style="color: #000000">;
+</span><span style="color: #008080"> 8</span> <span style="color: #000000">    }
+</span><span style="color: #008080"> 9</span>     <span style="color: #008000">//</span><span style="color: #008000">存储所有的文件夹</span>
+<span style="color: #008080">10</span>     <span style="color: #0000ff">var</span> folder =<span style="color: #000000"> [];
+</span><span style="color: #008080">11</span>     <span style="color: #008000">//</span><span style="color: #008000">stat检测状态</span>
+<span style="color: #008080">12</span>     fs.readdir("./album",<span style="color: #0000ff">function</span><span style="color: #000000">(err,files){
+</span><span style="color: #008080">13</span>         <span style="color: #008000">//</span><span style="color: #008000">files是个文件名的数组，并不是文件的数组，表示./album这个文件夹中的所有东西</span>
+<span style="color: #008080">14</span>         <span style="color: #008000">//</span><span style="color: #008000">包括文件、文件夹</span>
+<span style="color: #008080">15</span>         <span style="color: #0000ff">for</span>(<span style="color: #0000ff">var</span> i = 0 ; i &lt; files.length ;i++<span style="color: #000000">){
+</span><span style="color: #008080">16</span>             <span style="color: #0000ff">var</span> thefilename =<span style="color: #000000"> files[i];
+</span><span style="color: #008080">17</span>             <span style="color: #008000">//</span><span style="color: #008000">又要进行一次检测</span>
+<span style="color: #008080">18</span>             fs.stat("./album/" + thefilename , <span style="color: #0000ff">function</span><span style="color: #000000">(err,stats){
+</span><span style="color: #008080">19</span>                 <span style="color: #008000">//</span><span style="color: #008000">如果他是一个文件夹，那么输出它：</span>
+<span style="color: #008080">20</span>                 <span style="color: #0000ff">if</span><span style="color: #000000">(stats.isDirectory()){
+</span><span style="color: #008080">21</span> <span style="color: #000000">                    folder.push(thefilename);
+</span><span style="color: #008080">22</span> <span style="color: #000000">                }
+</span><span style="color: #008080">23</span> <span style="color: #000000">                console.log(folder);
+</span><span style="color: #008080">24</span> <span style="color: #000000">            });
+</span><span style="color: #008080">25</span> <span style="color: #000000">        }
+</span><span style="color: #008080">26</span> <span style="color: #000000">    });
+</span><span style="color: #008080">27</span> <span style="color: #000000">});
+</span><span style="color: #008080">28</span> 
+<span style="color: #008080">29</span> server.listen(3000,"127.0.0.1");</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><strong>&nbsp;&nbsp; 运行结果：</strong></p>
+<p><strong><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919171455618-1711249132.png" alt="" width="434" height="148"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919171642040-1173442664.png" alt="" width="281" height="275"></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 分析，根据代码是调用了API将目录通过数组的形式读出来，并且显示出来，可是为什么只显示了文件夹“ccc”，而没有其他的文件夹呢，到这里我们就能理解node.js的编程精髓之一了，那就是异步性，读取文件夹也是一种I/O操作，势必就要被阻塞，我们是使用for循环来读取的，当调用fs.readdir（）得到了正确的结果，文件列表信息，其中包括了文件和文件夹之后执行回调函数，此时我们需要进行筛选操作，这个时候我们需要再次进行一次I/O操作，而for循环（CPU）是不等我们的I/O设备的操作的，这个时候当一个I/O操作刚执行完的时候，得到了aaa是一个文件夹，但是因为在启动这个I/O操作的过程中，CPU必定已经执行了很多个循环了，变量thefilename早已经变成了其他的数值，至于为什么会变成ccc，那是因为CPU执行的速度太快了，早就跳到了数组的最后一个，而只有是文件夹才会被记录，所以不会是其他的文件，一定是一个文件夹名，同样的其他两个文件夹也是当I/o完成的时候thefilename早就变成了ccc了，所以输出的结果是这个样子，<strong><span style="background-color: #ff0000">在这里我们需要注意一点，</span></strong>这点非常重要，就是在<span style="background-color: #ff0000"><strong>标题八</strong></span>中不同用户的访问，虽然次序会变乱，可是最后还是能将欢迎userID和userID读取完毕一一对应上，也就是说<strong>userID这个变量在每一个浏览器访问的时候都是另外开辟了一个新空间</strong>，而在一台电脑上进行的for循环，thefilename却没有那样的好运，总是会被替换掉，彻底的替换掉，要不然的话结果将不会是全是“ccc”，也就是说<strong>thefilename没有开辟新的内存空间</strong>，关于这一点可能涉及到变量的定义范围，有效范围，命名空间，编译原理的优化和操作系统，计算机网络等相关的学科，值得深究和理解！！！！！！</p>
+<p>那么如何解决这样的问题呢，我们没有得到自己想要的东西，这个时候就要用到原子操作了，而node.js里面使用了<strong><span style="background-color: #ff0000">iterator迭代器</span></strong>来巧妙地实现了原子操作！！！</p>
+<p><strong>&nbsp; 方法二：</strong></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080"> 1</span> <span style="color: #0000ff">var</span> http = require("http"<span style="color: #000000">);
+</span><span style="color: #008080"> 2</span> <span style="color: #0000ff">var</span> fs = require("fs"<span style="color: #000000">);
+</span><span style="color: #008080"> 3</span> 
+<span style="color: #008080"> 4</span> <span style="color: #0000ff">var</span> server = http.createServer(<span style="color: #0000ff">function</span><span style="color: #000000">(req,res){
+</span><span style="color: #008080"> 5</span>     <span style="color: #008000">//</span><span style="color: #008000">不处理收藏夹小图标</span>
+<span style="color: #008080"> 6</span>     <span style="color: #0000ff">if</span>(req.url == "/favicon.ico"<span style="color: #000000">){
+</span><span style="color: #008080"> 7</span>         <span style="color: #0000ff">return</span><span style="color: #000000">;
+</span><span style="color: #008080"> 8</span> <span style="color: #000000">    }
+</span><span style="color: #008080"> 9</span>     <span style="color: #008000">//</span><span style="color: #008000">遍历album里面的所有文件、文件夹</span>
+<span style="color: #008080">10</span>     fs.readdir("./album/",<span style="color: #0000ff">function</span><span style="color: #000000">(err,files){
+</span><span style="color: #008080">11</span>         <span style="color: #008000">//</span><span style="color: #008000">files : ["0.jpg","1.jpg" ……,"aaa","bbb"];</span>
+<span style="color: #008080">12</span>         <span style="color: #008000">//</span><span style="color: #008000">files是一个存放文件(夹)名的数组</span>
+<span style="color: #008080">13</span>         <span style="color: #008000">//</span><span style="color: #008000">存放文件夹的数组</span>
+<span style="color: #008080">14</span>         <span style="color: #0000ff">var</span> folder =<span style="color: #000000"> [];
+</span><span style="color: #008080">15</span>         <span style="color: #008000">//</span><span style="color: #008000">迭代器就是强行把异步的函数，变成同步的函数</span>
+<span style="color: #008080">16</span>         <span style="color: #008000">//</span><span style="color: #008000">1做完了，再做2；2做完了，再做3</span>
+<span style="color: #008080">17</span>         (<span style="color: #0000ff">function</span><span style="color: #000000"> iterator(i){
+</span><span style="color: #008080">18</span>             <span style="color: #008000">//</span><span style="color: #008000">遍历结束</span>
+<span style="color: #008080">19</span>             <span style="color: #0000ff">if</span>(i ==<span style="color: #000000"> files.length){
+</span><span style="color: #008080">20</span> <span style="color: #000000">                console.log(folder);
+</span><span style="color: #008080">21</span>                 <span style="color: #0000ff">return</span><span style="color: #000000">;
+</span><span style="color: #008080">22</span> <span style="color: #000000">            }
+</span><span style="color: #008080">23</span>             fs.stat("./album/" + files[i],<span style="color: #0000ff">function</span><span style="color: #000000">(err,stats){
+</span><span style="color: #008080">24</span>                 <span style="color: #008000">//</span><span style="color: #008000">检测成功之后做的事情</span>
+<span style="color: #008080">25</span>                 <span style="color: #0000ff">if</span><span style="color: #000000">(stats.isDirectory()){
+</span><span style="color: #008080">26</span>                     <span style="color: #008000">//</span><span style="color: #008000">如果是文件夹，那么放入数组。不是，什么也不做。</span>
+<span style="color: #008080">27</span> <span style="color: #000000">                    folder.push(files[i]);
+</span><span style="color: #008080">28</span> <span style="color: #000000">                }
+</span><span style="color: #008080">29</span>                 iterator(i+1<span style="color: #000000">);
+</span><span style="color: #008080">30</span> <span style="color: #000000">            });
+</span><span style="color: #008080">31</span>         })(0<span style="color: #000000">);
+</span><span style="color: #008080">32</span> <span style="color: #000000">    });
+</span><span style="color: #008080">33</span> <span style="color: #000000">    res.end();
+</span><span style="color: #008080">34</span> <span style="color: #000000">});
+</span><span style="color: #008080">35</span> 
+<span style="color: #008080">36</span> server.listen(3000,"127.0.0.1");</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通过迭代器，递归的形式，我们可以很好的让一个操作完成之后在执行其他的操作，这样其实就相当于<span style="background-color: #ff0000"><strong>原子操作</strong></span>，要么一起完成，要么就不完成，以失败告终，这样其中的变量等数据就不用去考虑是不是被覆盖的情况了！！！！！！如下所示，这次正确输出结果！！！！！！</p>
+<p><strong>运行结果：</strong></p>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919173744618-929077471.png" alt=""></p>
+<p><span style="background-color: #00ff00; font-size: 16px"><strong>十、对于不同的文件类型，正确的显示相应的文件</strong></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在node.js中是没有web容器的概念的，这样容器需要完成的很多事情就需要我们自己去完成了，正因为这样我们需要了解更多的底层的东西！！！</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080"> 1</span> <span style="color: #0000ff">var</span> http = require("http"<span style="color: #000000">);
+</span><span style="color: #008080"> 2</span> <span style="color: #0000ff">var</span> url = require("url"<span style="color: #000000">);
+</span><span style="color: #008080"> 3</span> <span style="color: #0000ff">var</span> fs = require("fs"<span style="color: #000000">);
+</span><span style="color: #008080"> 4</span> <span style="color: #0000ff">var</span> path = require("path"<span style="color: #000000">);
+</span><span style="color: #008080"> 5</span> 
+<span style="color: #008080"> 6</span> http.createServer(<span style="color: #0000ff">function</span><span style="color: #000000">(req,res){
+</span><span style="color: #008080"> 7</span>     <span style="color: #008000">//</span><span style="color: #008000">得到用户的路径</span>
+<span style="color: #008080"> 8</span>     <span style="color: #0000ff">var</span> pathname =<span style="color: #000000"> url.parse(req.url).pathname;
+</span><span style="color: #008080"> 9</span>     <span style="color: #008000">//</span><span style="color: #008000">默认首页</span>
+<span style="color: #008080">10</span>     <span style="color: #0000ff">if</span>(pathname == "/"<span style="color: #000000">){
+</span><span style="color: #008080">11</span>         pathname = "index.html"<span style="color: #000000">;
+</span><span style="color: #008080">12</span> <span style="color: #000000">    }
+</span><span style="color: #008080">13</span>     <span style="color: #008000">//</span><span style="color: #008000">拓展名</span>
+<span style="color: #008080">14</span>     <span style="color: #0000ff">var</span> extname =<span style="color: #000000"> path.extname(pathname);
+</span><span style="color: #008080">15</span> 
+<span style="color: #008080">16</span>     <span style="color: #008000">//</span><span style="color: #008000">真的读取这个文件</span>
+<span style="color: #008080">17</span>     fs.readFile("./static/" + pathname,<span style="color: #0000ff">function</span><span style="color: #000000">(err,data){
+</span><span style="color: #008080">18</span>         <span style="color: #0000ff">if</span><span style="color: #000000">(err){
+</span><span style="color: #008080">19</span>             <span style="color: #008000">//</span><span style="color: #008000">如果此文件不存在，就应该用404返回</span>
+<span style="color: #008080">20</span>             fs.readFile("./static/404.html",<span style="color: #0000ff">function</span><span style="color: #000000">(err,data){
+</span><span style="color: #008080">21</span>                 res.writeHead(404,{"Content-type":"text/html;charset=UTF8"<span style="color: #000000">});
+</span><span style="color: #008080">22</span> <span style="color: #000000">                res.end(data);
+</span><span style="color: #008080">23</span> <span style="color: #000000">            });
+</span><span style="color: #008080">24</span>             <span style="color: #0000ff">return</span><span style="color: #000000">;
+</span><span style="color: #008080">25</span> <span style="color: #000000">        };
+</span><span style="color: #008080">26</span>         <span style="color: #008000">//</span><span style="color: #008000">MIME类型，就是</span>
+<span style="color: #008080">27</span>         <span style="color: #008000">//</span><span style="color: #008000">网页文件：  text/html</span>
+<span style="color: #008080">28</span>         <span style="color: #008000">//</span><span style="color: #008000">jpg文件 :   image/jpg</span>
+<span style="color: #008080">29</span>         <span style="color: #0000ff">var</span> mime =<span style="color: #000000"> getMime(extname);
+</span><span style="color: #008080">30</span>         res.writeHead(200,{"Content-type"<span style="color: #000000">:mime});
+</span><span style="color: #008080">31</span> <span style="color: #000000">        res.end(data);
+</span><span style="color: #008080">32</span> <span style="color: #000000">    });
+</span><span style="color: #008080">33</span> 
+<span style="color: #008080">34</span> }).listen(3000,"127.0.0.1"<span style="color: #000000">);
+</span><span style="color: #008080">35</span> 
+<span style="color: #008080">36</span> <span style="color: #0000ff">function</span><span style="color: #000000"> getMime(extname){
+</span><span style="color: #008080">37</span>     <span style="color: #0000ff">switch</span><span style="color: #000000">(extname){
+</span><span style="color: #008080">38</span>         <span style="color: #0000ff">case</span> ".html"<span style="color: #000000"> :
+</span><span style="color: #008080">39</span>             <span style="color: #0000ff">return</span> "text/html"<span style="color: #000000">;
+</span><span style="color: #008080">40</span>             <span style="color: #0000ff">break</span><span style="color: #000000">;
+</span><span style="color: #008080">41</span>         <span style="color: #0000ff">case</span> ".jpg"<span style="color: #000000"> : 
+</span><span style="color: #008080">42</span>             <span style="color: #0000ff">return</span> "image/jpg"<span style="color: #000000">;
+</span><span style="color: #008080">43</span>             <span style="color: #0000ff">break</span><span style="color: #000000">;
+</span><span style="color: #008080">44</span>         <span style="color: #0000ff">case</span> ".css"<span style="color: #000000">:
+</span><span style="color: #008080">45</span>             <span style="color: #0000ff">return</span> "text/css"<span style="color: #000000">;
+</span><span style="color: #008080">46</span>             <span style="color: #0000ff">break</span><span style="color: #000000">;
+</span><span style="color: #008080">47</span> <span style="color: #000000">    }
+</span><span style="color: #008080">48</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919174224915-1267863024.png" alt="" width="274" height="225"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/1157683-20170919174305212-316387493.png" alt="" width="569" height="229"></p>
+<p>&nbsp;&nbsp;&nbsp; 其中getMime()就是对不同类型进行处理的函数！！！</p>
+<p><span style="background-color: #ffcc00"><strong><span style="font-size: 16px">十一、总结</span></strong></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 总算是写完了这么长的文章，很多东西都是要在实践中去掌握的，特别是技术类的东西，在对node.js的探索中，我们已经慢慢的触摸到了门槛了，在接下来的学习中我们会对node.js有更加深刻的认识和使用！！！</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/zyrblog/tag/node.js/">node.js</a>, <a href="http://www.cnblogs.com/zyrblog/tag/%E4%BA%8B%E4%BB%B6%E7%8E%AF/">事件环</a>, <a href="http://www.cnblogs.com/zyrblog/tag/%E5%8D%95%E7%BA%BF%E7%A8%8B/">单线程</a>, <a href="http://www.cnblogs.com/zyrblog/tag/%E9%9D%9EI%2FO%E9%98%BB%E5%A1%9E/">非I/O阻塞</a>, <a href="http://www.cnblogs.com/zyrblog/tag/%E9%A1%B6%E5%B1%82%E8%B7%AF%E7%94%B1%E8%AE%BE%E8%AE%A1/">顶层路由设计</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(7545868,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;65258027-eb2e-e711-9fc1-ac853d9f53cc&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/zyrblog/" target="_blank"><img src="./初学node.js有感一 - 精心出精品 - 博客园_files/20170502120038.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/zyrblog/">精心出精品</a><br>
+            <a href="http://home.cnblogs.com/u/zyrblog/followees">关注 - 2</a><br>
+            <a href="http://home.cnblogs.com/u/zyrblog/followers">粉丝 - 13</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;65258027-eb2e-e711-9fc1-ac853d9f53cc&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(7545868,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">3</span>
+    </div>
+    <div class="buryit" onclick="votePost(7545868,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/zyrblog/p/6888798.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/zyrblog/p/6888798.html" title="发布于2017-05-22 11:56">编译原理——算符优先分析文法（附源代码）</a><br><a href="http://www.cnblogs.com/zyrblog/p/7589299.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/zyrblog/p/7589299.html" title="发布于2017-09-29 11:04">初学node.js有感二</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2017-09-19 17:59</span> <a href="http://www.cnblogs.com/zyrblog/">精心出精品</a> 阅读(<span id="post_view_count">428</span>) 评论(<span id="post_comment_count">1</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7545868" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/zyrblog/p/7545868.html#" onclick="AddToWz(7545868);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=355901,cb_entryId=7545868,cb_blogApp=currentBlogApp,cb_blogUserGuid='65258027-eb2e-e711-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/9/19 17:59:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/zyrblog/p/7545868.html#3801265" class="layer">#1楼</a><a name="3801265" id="comment_anchor_3801265"></a><span id="comment-maxId" style="display:none;">3801265</span><span id="comment-maxDate" style="display:none;">2017/9/30 11:32:59</span>  <span class="comment_date">2017-09-30 11:32</span> <a id="a_comment_author_3801265" href="http://www.cnblogs.com/zhanqun/" target="_blank">明月zq</a> <a href="http://msg.cnblogs.com/send/%E6%98%8E%E6%9C%88zq" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3801265" class="blog_comment_body">学习了...mark</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3801265,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3801265,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/zyrblog/p/7545868.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/zyrblog/p/7545868.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型工控、组态\仿真、建模CAD源码2018！</a><br><a href="https://cloud.tencent.com/act/first_purchase?fromSource=gwzcw.763755.763755.763755" target="_blank">【推荐】怎样购买腾讯云服务器更划算？</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="http://www.h3bpm.net/" target="_blank"><img width="300" height="250" src="./初学node.js有感一 - 精心出精品 - 博客园_files/24442-20180126164912131-1246397933.jpg" alt="h3bpm0126"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/588606/" target="_blank">李开复预言AI泡沫年底要破，LeCun：确实如此</a><br> ·  <a href="https://news.cnblogs.com/n/588605/" target="_blank">HTC与Google合作协议完成，Pixel团队正式加入Google硬件部门</a><br> ·  <a href="https://news.cnblogs.com/n/588603/" target="_blank">苹果编程应用Swift Playgrounds升级到2.0</a><br> ·  <a href="https://news.cnblogs.com/n/588604/" target="_blank">Apple Park已开放5个办公区 还有7个待批准</a><br> ·  <a href="https://news.cnblogs.com/n/588602/" target="_blank">360发布2017年网络诈骗报告 经济发达地区仍为诈骗高发区</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/34770/" target="_blank"><img width="468" height="60" src="./初学node.js有感一 - 精心出精品 - 博客园_files/24442-20171208101900738-116140477.jpg" alt="阿里云C2-1208"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/586236/" target="_blank">领域驱动设计在互联网业务开发中的实践</a><br> ·  <a href="http://kb.cnblogs.com/page/585502/" target="_blank">步入云计算</a><br> ·  <a href="http://kb.cnblogs.com/page/531409/" target="_blank">以操作系统的角度述说线程与进程</a><br> ·  <a href="http://kb.cnblogs.com/page/141729/" target="_blank">软件测试转型之路</a><br> ·  <a href="http://kb.cnblogs.com/page/177402/" target="_blank">门内门外看招聘</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/zyrblog/">精心出精品</a><br>园龄：<a href="https://home.cnblogs.com/u/zyrblog/" title="入园时间：2017-05-02">8个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/zyrblog/followers/">13</a><br>关注：<a href="https://home.cnblogs.com/u/zyrblog/followees/">2</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;65258027-eb2e-e711-9fc1-ac853d9f53cc&#39;)">+加关注</a></div><script>getFollowStatus('65258027-eb2e-e711-9fc1-ac853d9f53cc')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/12/01&#39;);return false;">&lt;</a></td><td align="center">2018年1月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/02/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalWeekendDay" align="center">6</td></tr><tr><td class="CalWeekendDay" align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalWeekendDay" align="center">13</td></tr><tr><td class="CalWeekendDay" align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td class="CalWeekendDay" align="center">20</td></tr><tr><td class="CalWeekendDay" align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td class="CalWeekendDay" align="center">27</td></tr><tr><td class="CalWeekendDay" align="center">28</td><td align="center">29</td><td class="CalTodayDay" align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td></tr><tr><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/zyrblog/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/zyrblog/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/zyrblog/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/zyrblog/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/zyrblog/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_recentposts" class="sidebar-block">
+<div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/zyrblog/p/8032325.html">1. 在windows上安装nginx</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7992957.html">2. 又是一个愚蠢的错误，皆因.xml而起</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7989284.html">3. Android浏览器访问java web的方法</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7967813.html">4. 一个傻乎乎的错误</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7787817.html">5. 关于在windows10中的vmware9.0里面安装的ubuntukylin15.04和windows共享目录的一些反思</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7768776.html">6. 关于最近工程的一些心得</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7634559.html">7. 关于springMVC中component-scan的问题以及springmvc.xml整理</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7619899.html">8. 初学node.js有感三</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7589299.html">9. 初学node.js有感二</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7545868.html">10. 初学node.js有感一</a></li>
+</ul>
+</div>
+</div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/zyrblog/tag/formidable/">formidable</a>(2)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/node.js/">node.js</a>(2)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/SpringMVC/">SpringMVC</a>(2)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>(2)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E7%88%AC%E8%99%AB/">爬虫</a>(2)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>(1)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E5%B9%B3%E8%A1%A1%E6%8E%92%E5%BA%8F%E4%BA%8C%E5%8F%89%E6%A0%91/">平衡排序二叉树</a>(1)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E4%B8%89%E5%8F%89%E6%A0%91/">三叉树</a>(1)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/">深度优先遍历</a>(1)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8/">十字链表</a>(1)</li><li><a href="http://www.cnblogs.com/zyrblog/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(21)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/zyrblog/archive/2017/12.html">2017年12月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/zyrblog/archive/2017/11.html">2017年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/zyrblog/archive/2017/10.html">2017年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/zyrblog/archive/2017/09.html">2017年9月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/zyrblog/archive/2017/05.html">2017年5月 (11)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_articlearchive" class="catListArticleArchive sidebar-block">
+<h3 class="catListTitle">文章档案<span style="font-size:11px;font-weight:normal">(2)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/zyrblog/archives/2017/05.html" rel="nofollow">2017年5月 (2)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	11079
+	</li>
+	<li class="liRank">
+		排名 -	30038
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zyrblog/p/7619899.html#3802619">1. Re:初学node.js有感三</a></li>
+        <li class="recent_comment_body">@潇湘风夜 语言只是一种工具，是帮助我们做一件事的方法，如果只是注重工具本身，而不注重自己要做的事情，那一切都是没有意义的，在完成一定业务的同时，可以有很多工具，没有好坏之分，只有适合不适合，能够透.......</li>
+        <li class="recent_comment_author">--精心出精品</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zyrblog/p/7619899.html#3802615">2. Re:初学node.js有感三</a></li>
+        <li class="recent_comment_body">koa2欢迎你，egg欢迎你，thinkjs欢迎你！<br>上面哪个比express差？</li>
+        <li class="recent_comment_author">--潇湘风夜</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zyrblog/p/7619899.html#3802340">3. Re:初学node.js有感三</a></li>
+        <li class="recent_comment_body">@Martin_lee绵薄之力，希望对汝有所裨益！...</li>
+        <li class="recent_comment_author">--精心出精品</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zyrblog/p/7619899.html#3802338">4. Re:初学node.js有感三</a></li>
+        <li class="recent_comment_body">正好看到。在自学vue，需要node。 一头雾水ing</li>
+        <li class="recent_comment_author">--Martin_lee</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zyrblog/p/7589299.html#3801637">5. Re:初学node.js有感二</a></li>
+        <li class="recent_comment_body">很好</li>
+        <li class="recent_comment_author">--赛嗯</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/zyrblog/p/6885922.html">1. 编译原理——词法分析器实现(2661)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6888798.html">2. 编译原理——算符优先分析文法（附源代码）(2097)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6884416.html">3. 数据结构与算法系列研究七——图、prim算法、dijkstra算法(807)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7589299.html">4. 初学node.js有感二(680)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7545868.html">5. 初学node.js有感一(427)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/zyrblog/p/7619899.html">1. 初学node.js有感三(4)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6888798.html">2. 编译原理——算符优先分析文法（附源代码）(3)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6885922.html">3. 编译原理——词法分析器实现(2)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6884416.html">4. 数据结构与算法系列研究七——图、prim算法、dijkstra算法(2)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7589299.html">5. 初学node.js有感二(2)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/zyrblog/p/6888798.html">1. 编译原理——算符优先分析文法（附源代码）(3)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7619899.html">2. 初学node.js有感三(3)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/7545868.html">3. 初学node.js有感一(3)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6884416.html">4. 数据结构与算法系列研究七——图、prim算法、dijkstra算法(2)</a></li><li><a href="http://www.cnblogs.com/zyrblog/p/6885922.html">5. 编译原理——词法分析器实现(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 精心出精品
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>
